@@ -1,0 +1,3 @@
+﻿  student management system.cpp
+C:\Users\29964\Desktop\学生管理系统\Project1\Project1\student management system.cpp(81,10): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\29964\Desktop\学生管理系统\Project1\Project1\student management system.cpp(80,8): warning C4101: “x”: 未引用的局部变量
