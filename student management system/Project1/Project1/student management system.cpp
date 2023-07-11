@@ -1,35 +1,50 @@
-#define  _CRT_SECURE_NO_WARNINGS  //½â¾öscanf
-#define _CRT_SECURE_NO_WARNINGS//½ûÓÃ°²È«º¯Êı¾¯¸æ
-#pragma warning(disable:6031)//½ûÓÃ 6031 µÄ°²È«¾¯¸æ
+#define  _CRT_SECURE_NO_WARNINGS  //è§£å†³scanf
+#define _CRT_SECURE_NO_WARNINGS//ç¦ç”¨å®‰å…¨å‡½æ•°è­¦å‘Š
+#pragma warning(disable:6031)//ç¦ç”¨ 6031 çš„å®‰å…¨è­¦å‘Š
+
+/*
+                                å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ V1.0
+	  ç¼–è¯‘ç¯å¢ƒï¼šVisual Studio 2022
+	  æºç åœ°å€ï¼šhttps://github.com/admin2004129/student-management-system
+          åšå®¢åœ°å€ï¼šhttps://blog.csdn.net/weixin_47830774?type=blog
+	  å¤‡æ³¨ï¼š
+	       ç”¨æˆ·åï¼š admin å¯†ç :admin 
+	       ç®¡ç†å‘˜ä¿®æ”¹å¯†ç ï¼šroot33846 
+		   
+*/
 
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
 #include <conio.h>
-using namespace std;
-typedef struct student ST;
-typedef struct activity SA;
+using namespace std; 
+typedef struct student ST;  //ç»“æ„ä½“é‡å‘½å
+typedef struct activity SA;  
 
-void welcome();
-void input();
+void welcome(); 
+void input(); 
 void display();
 void search_student(char _id[]);
 void modify(char _xid[]);
 void modify_test();
 
-struct student //Ñ§Éú
+struct student //å­¦ç”Ÿ
 {
-	char name[20];
+	char name[30];
 	char id[30];
-	char sex[20];
-	char spty[20];
-	char clas[20];
-	char date[50];
+	char sex[30];
+	char spty[30];
+	char clas[30];
+	char date[30];
 };
 
-struct activity // »î¶¯
+struct activity // æ´»åŠ¨
 {
-	char acname[60];
+	char acname[60]; 
+	char acdate[50];
+	char aclr[50];
+	char actx[50];
+	 
 };
 
 int main()
@@ -37,12 +52,12 @@ int main()
 	char u[20], p[20];
 	system("color 4");
 	printf("*******************************************************\n");
-	printf("*            <»¶Ó­À´µ½Ñ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³>               *\n");
+	printf("*            <æ¬¢è¿æ¥åˆ°å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ>               *\n");
 	printf("*******************************************************\n");
-	printf("ÇëÊäÈëÓÃ»§ÃûºÍÃÜÂë(ÒÔ¿Õ¸ñ·Ö¿ª)$>");
+	printf("è¯·è¾“å…¥ç”¨æˆ·åå’Œå¯†ç (ä»¥ç©ºæ ¼åˆ†å¼€)$>");
 	scanf("%s %s", u, p);
 	
-	if ((strcmp(u, "admin") == 0) && strcmp(p, "admin") == 0) //ÓÃ»§ÃÜÂëÅĞ¶Ï
+	if ((strcmp(u, "admin") == 0) && strcmp(p, "admin") == 0) //ç”¨æˆ·å¯†ç åˆ¤æ–­
 	{
 		while (1)
 		{
@@ -56,7 +71,7 @@ case '1':
 }
 case '2':
 {
-	printf("ÇëÊäÈëÑ§ºÅ$>");
+	printf("è¯·è¾“å…¥å­¦å·$>");
 	char _xid[25];
 	scanf("%s", _xid);
 	search_student(_xid); 
@@ -65,19 +80,19 @@ case '2':
 case '3':
 {
 	char pass[30];
-	printf("ÇëÊäÈë¹ÜÀíÔ±ÃÜÂë$>");
+	printf("è¯·è¾“å…¥ç®¡ç†å‘˜å¯†ç $>");
 	cin >> pass;
 	
 	if (strcmp(pass, "root33846") == 0)
 	{
-		printf("ÇëÊäÈëÑ§Éúid:\n");
+		printf("è¯·è¾“å…¥å­¦ç”Ÿid:\n");
 		char _xid[50];
 		scanf("%s", _xid);
 		modify(_xid);
 		break;
 	}
 	else {
-		printf("¹ÜÀíÔ±ÃÜÂë´íÎó ĞŞ¸ÄÊ§°Ü!\n");
+		printf("ç®¡ç†å‘˜å¯†ç é”™è¯¯ ä¿®æ”¹å¤±è´¥!\n");
 		system("pause");
 	}break;
 	
@@ -89,75 +104,80 @@ case '4':
 }
 case '5':
 {
-	printf("ÏµÍ³ÒÑÍË³ö »¶Ó­ÏÂ´ÎÊ¹ÓÃ(Çë°´ÈÎÒâ¼üÍË³ö)\n");
+	printf("ç³»ç»Ÿå·²é€€å‡º æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨(è¯·æŒ‰ä»»æ„é”®é€€å‡º)\n");
 	exit(0);
 } break;
 	
-	default: printf("ÊäÈë´íÎó ÏµÍ³×Ô¶¯ÍË³ö!\n"); exit(0); break;
+	default: printf("è¾“å…¥é”™è¯¯ ç³»ç»Ÿè‡ªåŠ¨é€€å‡º!\n"); exit(0); break;
 	
 }
 		}
 	}
 	else {
-		cout << "ÓÃ»§Ãû»òÃÜÂë´íÎó ÏµÍ³µÇÂ¼Ê§°Ü!" << endl;
+		cout << "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ ç³»ç»Ÿç™»å½•å¤±è´¥!" << endl;
 	}
 	return 0;
 }
 
-void welcome() //»¶Ó­Ò³
+void welcome() //æ¬¢è¿é¡µ
 {
 	system("color e3");
 	system("cls");
 	printf("*****************************************************\n");
-	printf("*              »¶Ó­À´µ½Ñ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³             *\n");
-	printf("*                     1.ĞÅÏ¢Â¼Èë                    *\n");
-	printf("*                     2.ĞÅÏ¢²éÕÒ                    *\n");
-	printf("*                     3.ĞÅÏ¢ĞŞ¸Ä                    *\n");
-	printf("*                     4.ĞÅÏ¢ÏÔÊ¾                    *\n");
-	printf("*                     5.ÍË³öÏµÍ³                    *\n");
+	printf("*              æ¬¢è¿æ¥åˆ°å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ             *\n");
+	printf("*                     1.ä¿¡æ¯å½•å…¥                    *\n");
+	printf("*                     2.ä¿¡æ¯æŸ¥æ‰¾                    *\n");
+	printf("*                     3.ä¿¡æ¯ä¿®æ”¹                    *\n");
+	printf("*                     4.ä¿¡æ¯æ˜¾ç¤º                    *\n");
+	printf("*                     5.é€€å‡ºç³»ç»Ÿ                    *\n");
 	printf("*****************************************************\n");
-	printf("ÇëÊäÈëĞòºÅÖ´ĞĞ$>\n");
-}
+	printf("è¯·è¾“å…¥åºå·æ‰§è¡Œ$>\n");
+} 
 
-void input() //ĞÅÏ¢Â¼Èë
+void input() //ä¿¡æ¯å½•å…¥
 {
 	ST st;
 	SA sa;
 	
-	FILE* fp = fopen("student.txt", "a"); //´ò¿ªÎÄ¼ş
-	
-	printf("ÇëÊäÈëĞÕÃû:\n");
-	scanf("%s", st.name);
-	printf("ÇëÊäÈëÑ§ºÅ:\n");
-	scanf("%s", st.id);
-	printf("ÇëÊäÈëĞÔ±ğ:\n");
-	scanf("%s", st.sex);
-	printf("ÇëÊäÈë×¨Òµ:\n");
-	scanf("%s", st.spty);
-	printf("ÇëÊäÈë³öÉúÄêÔÂ:\n");
-	scanf("%s", st.date);
-	printf("ÇëÊäÈë°à¼¶:\n");
-	scanf("%s", st.clas);
-	printf("ÇëÊäÈë»î¶¯Ãû³Æ\n");
-	scanf("%s", sa.acname);
-	
+	FILE* fp = fopen("student.txt", "a"); //æ‰“å¼€æ–‡ä»¶
 	if (fp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü ĞÅÏ¢Î´Â¼Èë!\n");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ ä¿¡æ¯æœªå½•å…¥!\n");
 		return;
 	}
 	else {
-		fprintf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
-			st.name,st.id,st.sex,st.spty,st.date,st.clas,sa.acname);
+		printf("è¯·è¾“å…¥å§“å:\n");
+		scanf("%s", st.name);
+		printf("è¯·è¾“å…¥å­¦å·:\n");
+		scanf("%s", st.id);
+		printf("è¯·è¾“å…¥æ€§åˆ«:\n");
+		scanf("%s", st.sex);
+		printf("è¯·è¾“å…¥ä¸“ä¸š:\n");
+		scanf("%s", st.spty);
+		printf("è¯·è¾“å…¥å‡ºç”Ÿå¹´æœˆ:\n");
+		scanf("%s", st.date);
+		printf("è¯·è¾“å…¥ç­çº§:\n");
+		scanf("%s", st.clas);
+		printf("è¯·è¾“å…¥æ´»åŠ¨åç§°\n");
+		scanf("%s", sa.acname);
+		printf("è¯·è¾“å…¥æ´»åŠ¨æ—¥æœŸ\n");
+		scanf("%s", sa.acdate);
+		printf("è¯·è¾“å…¥æ´»åŠ¨å†…å®¹\n");
+		scanf("%s", sa.aclr);
+		printf("è¯·è¾“å…¥æ´»åŠ¨å‚ä¸è€…\n");
+		scanf("%s", sa.actx);
+		fprintf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+			st.name,st.id,st.sex,st.spty,st.date,st.clas,
+			sa.acname,sa.acdate,sa.aclr,sa.actx);
 		
 		fclose(fp);
-		printf("Ñ§ÉúĞÅÏ¢Â¼ÈëÍê³É!\n");
+		printf("å­¦ç”Ÿä¿¡æ¯å½•å…¥å®Œæˆ!\n");
 		system("pause");
 		system("cls");
 	}
 }
 
-void search_student(char _id[]) //Ñ§ÉúĞÅÏ¢²éÕÒ
+void search_student(char _id[]) //å­¦ç”Ÿä¿¡æ¯æŸ¥æ‰¾
 {
 	ST st;
 	SA sa;
@@ -165,28 +185,29 @@ void search_student(char _id[]) //Ñ§ÉúĞÅÏ¢²éÕÒ
 	
 	if (fp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü ĞÅÏ¢²éÕÒÊ§°Ü!\n");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ ä¿¡æ¯æŸ¥æ‰¾å¤±è´¥!\n");
 		return;
 	}
 	else
 	{
-		while (fscanf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n",
-			st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname) != EOF)
+		while (fscanf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t\t%s\t%s\t%s\t\n",
+			st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname,sa.acdate,sa.aclr,sa.actx) != EOF)
 		{
 			if (strcmp(st.id, _id) == 0)
 			{
-				printf("ĞÕÃû:%s  Ñ§ºÅ:%s  ĞÔ±ğ:%s  ×¨Òµ:%s  ³öÉúÄêÔÂ:%s  °à¼¶:%s  »î¶¯Ãû³Æ:%s\n",
-					st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname);
+				printf("å§“å:%s  å­¦å·:%s  æ€§åˆ«:%s  ä¸“ä¸š:%s  å‡ºç”Ÿå¹´æœˆ:%s  ç­çº§:%s  æ´»åŠ¨åç§°:%s  æ´»åŠ¨æ—¶é—´:%s   æ´»åŠ¨å†…å®¹:%s   æ´»åŠ¨å‚ä¸è€…:%s\n",
+					st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname,sa.acdate,sa.aclr,sa.actx);
 				fclose(fp);
 				system("pause");
 			}
+			
 			
 		}
 		
 	}
 }
 
-void modify(char _xid[]) //ĞŞ¸Ä
+void modify(char _xid[]) //ä¿®æ”¹
 {
 	int mod = 0;
 	ST st;
@@ -194,58 +215,73 @@ void modify(char _xid[]) //ĞŞ¸Ä
 	FILE* xp = fopen("student.txt", "r");
 	if (xp == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü\n");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
 		return;
 	}
 	
 	FILE* tem = fopen("tem.txt", "w");
 	if (tem == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü\n");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
 		fclose(xp);
 		return;
 	}
 	
-	while (fscanf(xp, "%s %s %s %s %s %s %s\n",
-		st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname) != EOF)
+	while (fscanf(xp, "%s %s %s %s %s %s %s %s %s %s\n",
+		st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname,sa.acdate,sa.aclr,sa.actx) != EOF)
 	{
 		if (strcmp(st.id, _xid) == 0)
 		{ 
 			modify_test();
-			printf("ÇëÊäÈë¶ÔÓ¦ĞòºÅ¸ü¸Ä£º");
+			printf("è¯·è¾“å…¥å¯¹åº”åºå·æ›´æ”¹ï¼š");
 			char x = _getch();
 			switch (x)
 {
 case '1':
-	printf("ÇëÊäÈëĞÂµÄĞÕÃû: ");
+	printf("è¯·è¾“å…¥æ–°çš„å§“å: ");
 	scanf("%s", st.name);  break;
 	
 case '2':
-	printf("ÇëÊäÈëĞÂµÄÑ§ºÅ: ");
+	printf("è¯·è¾“å…¥æ–°çš„å­¦å·: ");
 	scanf("%s", st.id); break;
 case '3':
-	printf("ÇëÊäÈëĞÂµÄÑ§ºÅ: ");
+	printf("è¯·è¾“å…¥æ–°çš„å­¦å·: ");
 	scanf("%s", st.id); break;
 case '4':
-	printf("ÇëÊäÈëĞÂµÄĞÔ±ğ: ");
+	printf("è¯·è¾“å…¥æ–°çš„æ€§åˆ«: ");
 	scanf("%s", st.sex); break;
 case '5':
-	printf("ÇëÊäÈëĞÂµÄ×¨Òµ: ");
+	printf("è¯·è¾“å…¥æ–°çš„ä¸“ä¸š: ");
 	scanf("%s", st.spty); break;
 case '6':
-	printf("ÇëÊäÈëĞÂµÄ³öÉúÄêÔÂ: ");
+	printf("è¯·è¾“å…¥æ–°çš„å‡ºç”Ÿå¹´æœˆ: ");
 	scanf("%s", st.date); break;
 case '7':
-	printf("ÇëÊäÈëĞÂµÄ°à¼¶: ");
+	printf("è¯·è¾“å…¥æ–°çš„ç­çº§: ");
 	scanf("%s", st.clas); break;
 case '8':
-	printf("ÇëÊäÈëĞÂµÄ»î¶¯ĞÅÏ¢: ");
+	printf("è¯·è¾“å…¥æ–°çš„æ´»åŠ¨ä¿¡æ¯: ");
 	scanf("%s", sa.acname); break;
+case '9':
+    printf("è¯·è¾“å…¥æ–°çš„æ´»åŠ¨æ—¶é—´: ");
+	scanf("%s", sa.acdate); break;
+case '10':
+	printf("è¯·è¾“å…¥æ–°çš„æ´»åŠ¨å†…å®¹: ");
+	scanf("%s", sa.aclr); break;	
+case '11':
+	printf("è¯·è¾“å…¥æ–°çš„æ´»åŠ¨å‚ä¸è€…: ");
+	scanf("%s", sa.actx); break;
 }
 			mod = 1;
 		}
-		fprintf(tem, "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
-			st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname);
+		else
+		{
+			printf("æ‰¾ä¸åˆ°è¯¥å­¦ç”Ÿ!\n");
+			system("pause");
+			return;
+		}
+		fprintf(tem, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+			st.name, st.id, st.sex, st.spty, st.date, st.clas, sa.acname,sa.acdate,sa.aclr,sa.actx);
 	}
 	fclose(xp);
 	fclose(tem);
@@ -253,26 +289,27 @@ case '8':
 	{
 		remove("student.txt");
 		rename("tem.txt", "student.txt");
-		printf("Íê³ÉĞŞ¸Ä!\n");
+		printf("å®Œæˆä¿®æ”¹!\n");
 		system("pause");
 	}
 	else
 	{
 		remove("tem.txt");
-		printf("Ã»ÕÒµ½Ñ§Éú!\n");
+		printf("æ²¡æ‰¾åˆ°å­¦ç”Ÿ!\n");
 	}
 	
 	
 }
 
-void display() //ĞÅÏ¢ÏÔÊ¾
+void display() //ä¿¡æ¯æ˜¾ç¤º
 {
 	char str[700];
 	FILE* fp;
-	fp = fopen("student.txt", "r");
+	fp = fopen("student.txt", "r"); //åªè¯»æ–¹å¼æ‰“å¼€æ–‡ä»¶
 	
-	if (fp == nullptr) {
-		printf("Ñ§ÉúĞÅÏ¢ÏÔÊ¾Ê§°Ü!\n");
+	if (fp == NULL) {
+		printf("å­¦ç”Ÿä¿¡æ¯æ˜¾ç¤ºå¤±è´¥!\n");
+		return;
 	}
 	while (fgets(str, 700, fp) != NULL)
 	{
@@ -283,11 +320,11 @@ void display() //ĞÅÏ¢ÏÔÊ¾
 	fclose(fp);
 }
 
-void modify_test()
+void modify_test()//ä¿¡æ¯æç¤º
 {
-	printf("1.ĞÕÃû  2.Ñ§ºÅ  3.ĞÔ±ğ\n");
-	printf("4.×¨Òµ  5.³öÉúÄêÔÂ\n");
-	printf("6.°à¼¶  7.ĞÅÏ¢\n");
+	printf("1.å§“å  2.å­¦å·  3.æ€§åˆ«\n");
+	printf("4.ä¸“ä¸š  5.å‡ºç”Ÿå¹´æœˆ\n");
+	printf("6.ç­çº§  7.æ´»åŠ¨ä¿¡æ¯\n");
+	printf("8.æ´»åŠ¨æ—¶é—´  9.æ´»åŠ¨å†…å®¹ 10.æ´»åŠ¨å‚ä¸è€…\n"); 
 }
-
 
