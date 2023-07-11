@@ -1,10 +1,8 @@
-xx	xxs	12	在吗	6166	16	1
 yyy	sd	df	d	df	dfd	dfd
-nm	gfghf	gf	hg	h	g	g
-oppo	aa	aa	aa	aa	aa	aa
+nm	gfghf	gf	hg	h	g	g	aa	aa	aa	aa	aa	aa
 54	s	d	v	d	vd	d
 gf	fdg	df	df	g	fg	df
 23	c	fg	fdfd	gfg	df	gff
 s	df	d	df	d	f	dd
-f	f	f	f	f	f	f
-张三	123	男	人工智能	2004-3	2203	test
+f	f	f	f	f	f	f test ets 
+
